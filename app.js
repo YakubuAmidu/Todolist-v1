@@ -6,6 +6,8 @@ const port = 3000;
 
 app.set("view engine", "ejs");
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.get('/', function (req, res) {
   var today = new Date();
 
@@ -20,6 +22,12 @@ res.render("list", { kindOfDay: day });
 
 });
 
+app.post("/", function(req, res){
+  var item = req.body.newItem;
+  console.log(item);
+})
+
+
 app.listen(port, function () {
-  console.log(`Server started on port ${port}`);
+  console.log(`Sever started on port ${port}`);
 });
