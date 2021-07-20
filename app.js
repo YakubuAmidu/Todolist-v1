@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
+var item = "";
+
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,13 +20,13 @@ app.get('/', function (req, res) {
   };
     var day = today.toLocaleDateString("en-US", options);
 
-res.render("list", { kindOfDay: day });
+res.render("list", { kindOfDay: day, newItem: item });
 
 });
 
 app.post("/", function(req, res){
-  var item = req.body.newItem;
-  console.log(item);
+  item = req.body.newItem;
+ res.redirect("/");
 })
 
 
