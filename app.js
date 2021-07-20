@@ -27,9 +27,15 @@ res.render("list", { listTitle: day, newListItems: items });
 });
 
 app.post("/", function(req, res){
-  var item = req.body.newItem;
-  items.push(item);
- res.redirect("/");
+  let item = req.body.newItem;
+
+  if(req.body.list == "work"){
+    workItems.push(item);
+    res.redirect("/work");
+  } else {
+    items.push(item);
+    res.redirect("/");
+  }
 });
 
 app.get("/work", function(req, res){
