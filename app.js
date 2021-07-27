@@ -56,6 +56,11 @@ app.get('/', function (req, res) {
   });
 });
 
+app.get('/:customListName', function (req, res) {
+  let customListName = req.params.customListName;
+  console.log(customListName);
+});
+
 app.post('/', function (req, res) {
   let itemName = req.body.newItem;
 
@@ -79,15 +84,15 @@ app.post('/delete', function (req, res) {
   });
 });
 
-app.get('/work', function (req, res) {
-  res.render('list', { listTitle: 'work list', newListItems: workItems });
-});
+// app.get('/work', function (req, res) {
+//   res.render('list', { listTitle: 'work list', newListItems: workItems });
+// });
 
-app.post('/work', function (req, res) {
-  let item = req.body.newItem;
-  workItems.push(item);
-  res.redirect('/work');
-});
+// app.post('/work', function (req, res) {
+//   let item = req.body.newItem;
+//   workItems.push(item);
+//   res.redirect('/work');
+// });
 
 app.get('/about', function (req, res) {
   res.render('about');
