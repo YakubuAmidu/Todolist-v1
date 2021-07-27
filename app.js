@@ -76,6 +76,7 @@ app.get('/:customListName', function (req, res) {
         });
 
         list.save();
+        res.redirect('/' + customListName);
       } else {
         //Show existing list
         res.render('list', {
