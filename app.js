@@ -66,6 +66,16 @@ app.get('/', function (req, res) {
 app.get('/:customListName', function (req, res) {
   let customListName = req.params.customListName;
 
+  List.findOne({ name: customListName }, function (err, foundList) {
+    if (!err) {
+      if (!foundList) {
+        console.log('Doesnt exist');
+      } else {
+        console.log('Exist');
+      }
+    }
+  });
+
   const list = new List({
     name: customListName,
     items: defaultItems,
