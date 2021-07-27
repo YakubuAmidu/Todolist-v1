@@ -37,6 +37,13 @@ const item3 = new Item({
 
 const defaultItems = [item1, item2, item3];
 
+const listSchema = {
+  name: String,
+  items: [itemsSchema],
+};
+
+const List = mongoose.model('List', listSchema);
+
 app.get('/', function (req, res) {
   Item.find({}, function (err, foundItems) {
     if (foundItems.length === 0) {
@@ -58,7 +65,13 @@ app.get('/', function (req, res) {
 
 app.get('/:customListName', function (req, res) {
   let customListName = req.params.customListName;
-  console.log(customListName);
+
+  const list = new List({
+    name: customListName,
+    items: defaultItems,
+  });
+
+  list.save();
 });
 
 app.post('/', function (req, res) {
