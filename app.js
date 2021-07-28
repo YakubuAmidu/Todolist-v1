@@ -90,14 +90,22 @@ app.get('/:customListName', function (req, res) {
 
 app.post('/', function (req, res) {
   let itemName = req.body.newItem;
+  let listName = req.body.list;
 
   let item = new Item({
     name: itemName,
   });
 
-  item.save();
-
-  res.redirect('/');
+  if (listName === 'Today') {
+    item.save();
+    res.redirect('/');
+  } else {
+    List.findOne({ name: listName }, function (err, foundList) {
+      foundList.items.push(item);
+      foundList.save();
+      res.redirect('/' + listName);
+    });
+  }
 });
 
 app.post('/delete', function (req, res) {
