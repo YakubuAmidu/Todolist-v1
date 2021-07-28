@@ -11,8 +11,6 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-//"mongodb+srv://cluster0.2rfhl.mongodb.net/myFirstDatabase"
-
 mongoose.connect('mongodb://localhost:27017/todolistDB', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -133,16 +131,6 @@ app.post('/delete', function (req, res) {
     );
   }
 });
-
-// app.get('/work', function (req, res) {
-//   res.render('list', { listTitle: 'work list', newListItems: workItems });
-// });
-
-// app.post('/work', function (req, res) {
-//   let item = req.body.newItem;
-//   workItems.push(item);
-//   res.redirect('/work');
-// });
 
 app.get('/about', function (req, res) {
   res.render('about');
