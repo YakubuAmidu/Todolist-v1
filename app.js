@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const _ = require('lodash');
 
 const app = express();
 const port = 3000;
@@ -64,7 +65,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/:customListName', function (req, res) {
-  let customListName = req.params.customListName;
+  let customListName = _.capitalize(req.params.customListName);
 
   List.findOne({ name: customListName }, function (err, foundList) {
     if (!err) {
